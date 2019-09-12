@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Perform necessary metasploit setup steps
+# after package is installed.
+#
+
+BINS="msfbinscan msfconsole msfd msfdb msfelfscan msfmachscan msfpescan msfrop msfrpc msfrpcd msfupdate msfvenom"
+
+if [ -x /usr/sbin/update-alternatives -o -x /usr/bin/update-alternatives ] ; then
+	for BIN in $BINS; do
+		update-alternatives --install /usr/bin/$BIN $BIN /opt/metasploit-framework/bin/$BIN 100
+	done
+	echo "Run msfconsole to get started"
+else
+	echo "Run /opt/metasploit-framework/bin/msfconsole to get started"
+fi
+
+exit 0
